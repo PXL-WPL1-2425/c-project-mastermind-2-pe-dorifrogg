@@ -143,32 +143,10 @@ namespace Mastermind
                 scoreLabel.Content = $"Score: {score}";
                 if (attemptCounter > 10)
                 {
-                    MessageBoxResult result = MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.\nWould you like to try again?", "FAILED", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    switch (result)
-                    {
-                        case MessageBoxResult.Yes:
-                            GenerateColours(out colour1, out colour2, out colour3, out colour4);
-                            solutionTextBox.Text = $"{colour1}, {colour2}, {colour3}, {colour4}";
-                            attemptCounter = 1;
-                            attemptLabel.Content = "Attempt: 1";
-                            secondsCounter = 0;
-                            timeLabel.Content = "Seconds: 0";
-                            score = 100;
-                            scoreLabel.Content = "Score: 100";
-                            comboBox1.SelectedIndex = -1;
-                            comboBox2.SelectedIndex = -1;
-                            comboBox3.SelectedIndex = -1;
-                            comboBox4.SelectedIndex = -1;
-                            Clear10Labels(label1List);
-                            Clear10Labels(label2List);
-                            Clear10Labels(label3List);
-                            Clear10Labels(label4List);
-                            break;
-                        case MessageBoxResult.No:
-                            quitBool = true;
-                            mastermindWindow.Close();
-                            break;
-                    }
+                    MessageBoxResult result = MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
+                    timer.Stop();
+                    GoToMainMenu();
+                    return;
                 }
             }
             timeLabel.Content = $"Seconds: {secondsCounter}";
@@ -193,6 +171,41 @@ namespace Mastermind
                 labelList[i].Background = Brushes.Transparent;
                 labelList[i].BorderBrush = Brushes.Transparent;
             }
+        }
+
+        private void StartGame()
+        {
+            timer.Start();
+            GenerateColours(out colour1, out colour2, out colour3, out colour4);
+            solutionTextBox.Text = $"{colour1}, {colour2}, {colour3}, {colour4}";
+            attemptCounter = 1;
+            attemptLabel.Content = "Attempt: 1";
+            secondsCounter = 0;
+            timeLabel.Content = "Seconds: 0";
+            score = 100;
+            scoreLabel.Content = "Score: 100";
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+            comboBox3.SelectedIndex = -1;
+            comboBox4.SelectedIndex = -1;
+            Clear10Labels(label1List);
+            Clear10Labels(label2List);
+            Clear10Labels(label3List);
+            Clear10Labels(label4List);
+        }
+        private void GoToMainMenu()
+        {
+            newGameButton.Visibility = Visibility.Visible;
+            highscoresButton.Visibility = Visibility.Visible;
+            closeButton.Visibility = Visibility.Visible;
+            comboBox1.Visibility = Visibility.Hidden;
+            comboBox2.Visibility = Visibility.Hidden;
+            comboBox3.Visibility = Visibility.Hidden;
+            comboBox4.Visibility = Visibility.Hidden;
+            checkButton.Visibility = Visibility.Hidden;
+            attemptLabel.Visibility = Visibility.Hidden;
+            timeLabel.Visibility = Visibility.Hidden;
+            scoreLabel.Visibility = Visibility.Hidden;
         }
         //EVENT METHODS
         private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -339,32 +352,9 @@ namespace Mastermind
                 scoreLabel.Content = $"Score: {score}";
                 if (attemptCounter > 10)
                 {
-                    MessageBoxResult result = MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.\nWould you like to try again?", "FAILED", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    switch (result)
-                    {
-                        case MessageBoxResult.Yes:
-                            GenerateColours(out colour1, out colour2, out colour3, out colour4);
-                            solutionTextBox.Text = $"{colour1}, {colour2}, {colour3}, {colour4}";
-                            attemptCounter = 1;
-                            attemptLabel.Content = "Attempt: 1";
-                            secondsCounter = 0;
-                            timeLabel.Content = "Seconds: 0";
-                            score = 100;
-                            scoreLabel.Content = "Score: 100";
-                            comboBox1.SelectedIndex = -1;
-                            comboBox2.SelectedIndex = -1;
-                            comboBox3.SelectedIndex = -1;
-                            comboBox4.SelectedIndex = -1;
-                            Clear10Labels(label1List);
-                            Clear10Labels(label2List);
-                            Clear10Labels(label3List);
-                            Clear10Labels(label4List);
-                            break;
-                        case MessageBoxResult.No:
-                            quitBool = true;
-                            mastermindWindow.Close();
-                            break;
-                    }
+                    MessageBoxResult result = MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
+                    timer.Stop();
+                    GoToMainMenu();
                     return;
                 }
                 MessageBox.Show("At least one of the combo boxes is empty, try again.");
@@ -455,32 +445,9 @@ namespace Mastermind
             }
             if (borderList[0] == "DarkRed" && borderList[1] == "DarkRed" && borderList[2] == "DarkRed" && borderList[3] == "DarkRed")
             {
-                MessageBoxResult result = MessageBox.Show($"The correct code has been found in {attemptCounter.ToString()} attempts. \nWould you like to play again?", "Winner", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        GenerateColours(out colour1, out colour2, out colour3, out colour4);
-                        solutionTextBox.Text = $"{colour1}, {colour2}, {colour3}, {colour4}";
-                        attemptCounter = 1;
-                        attemptLabel.Content = "Attempt: 1";
-                        secondsCounter = 0;
-                        timeLabel.Content = "Seconds: 0";
-                        score = 100;
-                        scoreLabel.Content = "Score: 100";
-                        comboBox1.SelectedIndex = -1;
-                        comboBox2.SelectedIndex = -1;
-                        comboBox3.SelectedIndex = -1;
-                        comboBox4.SelectedIndex = -1;
-                        Clear10Labels(label1List);
-                        Clear10Labels(label2List);
-                        Clear10Labels(label3List);
-                        Clear10Labels(label4List);
-                        break;
-                    case MessageBoxResult.No:
-                        quitBool = true;
-                        mastermindWindow.Close();
-                        break;
-                }
+                MessageBoxResult result = MessageBox.Show($"The correct code has been found in {attemptCounter.ToString()} attempts.", "Winner", MessageBoxButton.OK, MessageBoxImage.Question);
+                timer.Stop();
+                GoToMainMenu();
                 return;
             }
             comboBox1.SelectedIndex = -1;
@@ -544,7 +511,7 @@ namespace Mastermind
             newGameButton.Visibility = Visibility.Hidden;
             highscoresButton.Visibility = Visibility.Hidden;
             closeButton.Visibility = Visibility.Hidden;
-            timer.Start();
+            StartGame();
             comboBox1.Visibility = Visibility.Visible;
             comboBox2.Visibility = Visibility.Visible;
             comboBox3.Visibility = Visibility.Visible;
