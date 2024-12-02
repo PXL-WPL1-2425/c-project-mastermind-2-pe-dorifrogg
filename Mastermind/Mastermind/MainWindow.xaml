@@ -101,7 +101,7 @@
         <Button x:Name="settingsButton" Visibility="Visible" Grid.Column="1" Content="Settings" HorizontalAlignment="Left" Margin="313,205,0,0" VerticalAlignment="Top" Height="38" Width="68" Click="settingsButton_Click"/>
 
         <Button x:Name="newGameButton" Visibility="Hidden" Grid.Column="1" Content="New Game" HorizontalAlignment="Left" Margin="313,82,0,0" VerticalAlignment="Top" Height="38" Width="68" Click="newGameButton_Click"/>
-        <Button x:Name="highscoresButton" Visibility="Hidden" Grid.Column="1" Content="Highscores" HorizontalAlignment="Left" Margin="313,182,0,0" VerticalAlignment="Top" Height="38" Width="68"/>
+        <Button x:Name="highscoresButton" Visibility="Hidden" Grid.Column="1" Content="Highscores" HorizontalAlignment="Left" Margin="313,182,0,0" VerticalAlignment="Top" Height="38" Width="68" Click="highscoresButton_Click"/>
         <Button x:Name="closeButton" Visibility="Hidden" Grid.Column="1" Content="Close Game" HorizontalAlignment="Left" Margin="313,282,0,0" VerticalAlignment="Top" Height="38" Width="68" Click="closeButton_Click"/>
 
         <Label Grid.Column="1" x:Name="numberOfAttemptsLabel" Content="Number of attempts:" Visibility="Hidden" HorizontalAlignment="Left" Margin="252,209,0,0" VerticalAlignment="Top"/>

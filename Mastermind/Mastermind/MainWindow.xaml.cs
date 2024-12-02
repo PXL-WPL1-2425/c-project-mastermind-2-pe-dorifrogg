@@ -25,10 +25,13 @@ namespace Mastermind
         string currentPlayerName;
         int attemptCounter = 1;
         int secondsCounter = 0;
+        int playerCounter = 0;
         int score = 100;
         int numberOfAttempts;
+        StringBuilder sb = new StringBuilder();
         bool quitBool = false;
         private DispatcherTimer timer = new DispatcherTimer();
+        string[,] highscores = new string[15,3];
         List<Label> label1List = new List<Label>();
         List<Label> label2List = new List<Label>();
         List<Label> label3List = new List<Label>();
@@ -145,6 +148,10 @@ namespace Mastermind
                 if (attemptCounter > 10)
                 {
                     MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
+                    highscores[playerCounter - 1, 1] = currentPlayerName;
+                    highscores[playerCounter - 1, 2] = (attemptCounter - 1).ToString();
+                    highscores[playerCounter - 1, 3] = "0";
+                    sb.Append(highscores[playerCounter - 1, 1] + " - " + highscores[playerCounter - 1, 2] + " pogingen - " + highscores[playerCounter - 1, 3] + "/100\n");
                     timer.Stop();
                     GoToMainMenu();
                     return;
@@ -176,6 +183,7 @@ namespace Mastermind
 
         private void StartGame()
         {
+            playerCounter += 1;
             timer.Start();
             GenerateColours(out colour1, out colour2, out colour3, out colour4);
             solutionTextBox.Text = $"{colour1}, {colour2}, {colour3}, {colour4}";
@@ -355,6 +363,10 @@ namespace Mastermind
                 if (attemptCounter > 10)
                 {
                     MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
+                    highscores[playerCounter - 1, 1] = currentPlayerName;
+                    highscores[playerCounter - 1, 2] = (attemptCounter-1).ToString();
+                    highscores[playerCounter - 1, 3] = "0";
+                    sb.Append(highscores[playerCounter - 1, 1] + " - " + highscores[playerCounter - 1, 2] + " pogingen - " + highscores[playerCounter - 1, 3] + "/100\n");
                     timer.Stop();
                     GoToMainMenu();
                     return;
@@ -448,6 +460,10 @@ namespace Mastermind
             if (borderList[0] == "DarkRed" && borderList[1] == "DarkRed" && borderList[2] == "DarkRed" && borderList[3] == "DarkRed")
             {
                 MessageBox.Show($"The correct code has been found in {attemptCounter.ToString()} attempts.", "Winner", MessageBoxButton.OK, MessageBoxImage.Question);
+                highscores[playerCounter - 1, 1] = currentPlayerName;
+                highscores[playerCounter - 1, 2] = attemptCounter.ToString(); 
+                highscores[playerCounter - 1, 3] = score.ToString();
+                sb.Append(highscores[playerCounter - 1, 1] + " - " + highscores[playerCounter - 1, 2] + " pogingen - " + highscores[playerCounter - 1, 3] + "/100\n");
                 timer.Stop();
                 GoToMainMenu();
                 return;
@@ -553,6 +569,11 @@ namespace Mastermind
             {
                 MessageBox.Show("The name text box is empty, please try again!", "INCORRECT NAME", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void highscoresButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(sb.ToString(), "Mastermind highscores", MessageBoxButton.OK);
         }
     }
 }
