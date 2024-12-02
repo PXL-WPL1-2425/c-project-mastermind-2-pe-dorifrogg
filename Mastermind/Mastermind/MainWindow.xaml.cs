@@ -22,6 +22,7 @@ namespace Mastermind
         string colour2;
         string colour3;
         string colour4;
+        string currentPlayerName;
         int attemptCounter = 1;
         int secondsCounter = 0;
         int score = 100;
@@ -143,7 +144,7 @@ namespace Mastermind
                 scoreLabel.Content = $"Score: {score}";
                 if (attemptCounter > 10)
                 {
-                    MessageBoxResult result = MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
+                    MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
                     timer.Stop();
                     GoToMainMenu();
                     return;
@@ -188,13 +189,10 @@ namespace Mastermind
             comboBox2.SelectedIndex = -1;
             comboBox3.SelectedIndex = -1;
             comboBox4.SelectedIndex = -1;
-            Clear10Labels(label1List);
-            Clear10Labels(label2List);
-            Clear10Labels(label3List);
-            Clear10Labels(label4List);
         }
         private void GoToMainMenu()
         {
+            titleLabel.Visibility = Visibility.Visible;
             newGameButton.Visibility = Visibility.Visible;
             highscoresButton.Visibility = Visibility.Visible;
             closeButton.Visibility = Visibility.Visible;
@@ -206,6 +204,10 @@ namespace Mastermind
             attemptLabel.Visibility = Visibility.Hidden;
             timeLabel.Visibility = Visibility.Hidden;
             scoreLabel.Visibility = Visibility.Hidden;
+            Clear10Labels(label1List);
+            Clear10Labels(label2List);
+            Clear10Labels(label3List);
+            Clear10Labels(label4List);
         }
         //EVENT METHODS
         private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -352,7 +354,7 @@ namespace Mastermind
                 scoreLabel.Content = $"Score: {score}";
                 if (attemptCounter > 10)
                 {
-                    MessageBoxResult result = MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
+                    MessageBox.Show($"You have failed! The correct code was: {colour1} {colour2} {colour3} {colour4}.", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
                     timer.Stop();
                     GoToMainMenu();
                     return;
@@ -445,7 +447,7 @@ namespace Mastermind
             }
             if (borderList[0] == "DarkRed" && borderList[1] == "DarkRed" && borderList[2] == "DarkRed" && borderList[3] == "DarkRed")
             {
-                MessageBoxResult result = MessageBox.Show($"The correct code has been found in {attemptCounter.ToString()} attempts.", "Winner", MessageBoxButton.OK, MessageBoxImage.Question);
+                MessageBox.Show($"The correct code has been found in {attemptCounter.ToString()} attempts.", "Winner", MessageBoxButton.OK, MessageBoxImage.Question);
                 timer.Stop();
                 GoToMainMenu();
                 return;
@@ -499,6 +501,7 @@ namespace Mastermind
             numberOfAttemptsLabel.Visibility = Visibility.Visible;
             attemptsTextBox.Visibility = Visibility.Visible;
             confirmAttemptsButton.Visibility = Visibility.Visible;
+
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -511,15 +514,10 @@ namespace Mastermind
             newGameButton.Visibility = Visibility.Hidden;
             highscoresButton.Visibility = Visibility.Hidden;
             closeButton.Visibility = Visibility.Hidden;
-            StartGame();
-            comboBox1.Visibility = Visibility.Visible;
-            comboBox2.Visibility = Visibility.Visible;
-            comboBox3.Visibility = Visibility.Visible;
-            comboBox4.Visibility = Visibility.Visible;
-            checkButton.Visibility = Visibility.Visible;
-            attemptLabel.Visibility = Visibility.Visible;
-            timeLabel.Visibility = Visibility.Visible;
-            scoreLabel.Visibility = Visibility.Visible;
+            playerNameLabel.Visibility = Visibility.Visible;
+            nameTextBox.Visibility = Visibility.Visible;
+            confirmNameButton.Visibility = Visibility.Visible;
+            
         }
 
         private void confirmAttemptsButton_Click(object sender, RoutedEventArgs e)
@@ -530,6 +528,31 @@ namespace Mastermind
             numberOfAttemptsLabel.Visibility = Visibility.Hidden;
             attemptsTextBox.Visibility = Visibility.Hidden;
             confirmAttemptsButton.Visibility = Visibility.Hidden;
+        }
+
+        private void confirmNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (nameTextBox.Text.ToString() != "")
+            {
+                playerNameLabel.Visibility = Visibility.Hidden;
+                nameTextBox.Visibility = Visibility.Hidden;
+                confirmNameButton.Visibility = Visibility.Hidden;
+                titleLabel.Visibility = Visibility.Hidden;
+                currentPlayerName = nameTextBox.Text.ToString();
+                StartGame();
+                comboBox1.Visibility = Visibility.Visible;
+                comboBox2.Visibility = Visibility.Visible;
+                comboBox3.Visibility = Visibility.Visible;
+                comboBox4.Visibility = Visibility.Visible;
+                checkButton.Visibility = Visibility.Visible;
+                attemptLabel.Visibility = Visibility.Visible;
+                timeLabel.Visibility = Visibility.Visible;
+                scoreLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("The name text box is empty, please try again!", "INCORRECT NAME", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

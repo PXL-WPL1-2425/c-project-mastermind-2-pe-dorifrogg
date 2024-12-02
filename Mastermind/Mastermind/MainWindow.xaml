@@ -108,6 +108,9 @@
         <TextBox x:Name="attemptsTextBox" Visibility="Hidden" Grid.Column="1" HorizontalAlignment="Left" Margin="373,213,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="confirmAttemptsButton" Visibility="Hidden" Grid.Column="1" Content="Confirm Attempts" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="38" Width="120" Click="confirmAttemptsButton_Click"/>
 
+        <Label Grid.Column="1" x:Name="playerNameLabel" Content="Enter player name:" Visibility="Hidden" HorizontalAlignment="Left" Margin="234,213,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="nameTextBox" Visibility="Hidden" Grid.Column="1" HorizontalAlignment="Left" Margin="347,216,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="confirmNameButton" Visibility="Hidden" Grid.Column="1" Content="Confirm Name" HorizontalAlignment="Left" Margin="287,254,0,0" VerticalAlignment="Top" Height="38" Width="120" Click="confirmNameButton_Click"/>
 
     </Grid>
 
